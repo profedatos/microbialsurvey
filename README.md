@@ -190,10 +190,179 @@ Las métricas calculadas por defecto son:
  - Distancia UniFrac ponderada (una medida cuantitativa de la disimilitud de la comunidad que incorpora relaciones filogenéticas entre las características)
 
 
-Un parámetro importante que debe proporcionarse a este script es --p-sampling-depth, que es la profundidad de muestreo uniforme (es decir, rarefacción). 
+Un parámetro importante que debe proporcionarse a este script es `--p-sampling-depth`, que es la profundidad de muestreo uniforme (es decir, rarefacción). 
 
 Debido a que la mayoría de las métricas de diversidad son sensibles a diferentes profundidades de muestreo en diferentes muestras, este script submuestreará aleatoriamente los recuentos de cada muestra hasta el valor proporcionado para este parámetro. 
 
-Por ejemplo, si proporciona --p-sampling-depth 500, este paso submuestreará los recuentos en cada muestra sin reemplazo para que cada muestra en la tabla resultante tenga un recuento total de 500. Si el recuento total de cualquier muestra (s ) son menores que este valor, esas muestras se eliminarán del análisis de diversidad. Elegir este valor es complicado. Se recomienda que haga su elección revisando la información presentada en el archivo table.qzv que se creó anteriormente. Elija un valor lo más alto posible (para que conserve más secuencias por muestra) y, al mismo tiempo, excluya la menor cantidad de muestras posible.
+Por ejemplo, si proporciona `--p-sampling-depth 500`, este paso submuestreará los recuentos en cada muestra sin reemplazo para que cada muestra en la tabla resultante tenga un recuento total de 500. Si el recuento total de cualquier muestra (s) es menor que este valor, esas muestras se eliminarán del análisis de diversidad. Elegir este valor es complicado. Se recomienda que haga su elección revisando la información presentada en el archivo table.qzv que se creó anteriormente. 
+Elija un valor lo más alto posible (para que conserve más secuencias por muestra) y, al mismo tiempo, excluya la menor cantidad de muestras posible.
+
+Pregunta
+
+Vea el artefacto table.qzv QIIME 2 y, en particular, la pestaña Detalle de muestra interactiva en esa visualización. ¿Qué valor elegiría pasar por --p-sampling-depth? ¿Cuántas muestras se excluirán de su análisis en función de esta elección? ¿Cuántas secuencias totales analizará en el comando core-metrics-phylogenetic?
+
+```[bash]
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree.qza \
+  --i-table table.qza \
+  --p-sampling-depth 1103 \
+  --m-metadata-file sample-metadata.tsv \
+  --output-dir core-metrics-results
+```
+
+Aquí establecemos el parámetro `--p-sampling-depth` en `1103`. Este valor se eligió en función del número de secuencias en la muestra `L3S313` porque está cerca del número de secuencias en las siguientes muestras que tienen conteos de secuencia más altos, y porque es considerablemente más alto (relativamente) que el número de secuencias en las muestras que tienen menos secuencias.   
+Esto nos permitirá conservar la mayoría de nuestras muestras. Las tres muestras que tienen menos secuencias se eliminarán de los análisis de `core-metrics-phylogenetics` y de cualquier cosa que utilice estos resultados.  
+
+Vale la pena señalar que estas tres muestras son muestras de la _palma derecha_. 
+Perder gran cantidad de muestras de una categoría de metadatos no es lo ideal. Sin embargo, estamos dejando caer una cantidad suficientemente pequeña de muestras aquí, teniendo un buen trade-off entre las secuencias totales analizadas y la cantidad de muestras retenidas.
+
+
+Después de calcular las métricas de diversidad, podemos comenzar a explorar la composición microbiana de las muestras en el contexto de la metadata. Esta información está presente en el archivo de metadatos de muestra que descargamos anteriormente.
+
+Primero probaremos las asociaciones entre las columnas de metadata categórica y los datos de diversidad alfa. Haremos eso aquí por la _Faith Phylogenetic Diversity_ (una medida de la riqueza de la comunidad) y la métrica de equidad.
+
+
+```[bash]
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/faith_pd_vector.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --o-visualization core-metrics-results/faith-pd-group-significance.qzv
+```
+Equidad:
+```
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/evenness_vector.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --o-visualization core-metrics-results/evenness-group-significance.qzv
+  ```
+  
+  En este dataset, ninguna columna de metadatos de muestra continua (p. Ej., Días desde el inicio del experimento) se correlaciona con la diversidad alfa, por lo que no probaremos esas asociaciones aquí. Si están interesados en realizar esas pruebas (para este dataset o para otros), puede usar el comando de correlación alfa de diversidad de qiime `qiime diversity alpha-correlation`.
+
+A continuación, analizaremos la composición de la muestra en el contexto de metadatos categóricos usando PERMANOVA (descrito por primera vez en [Anderson (2001)](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1442-9993.2001.01070.pp.x)) usando el comando de `beta-group-significance`. Los siguientes comandos probarán si las distancias entre las muestras dentro de un grupo, como las muestras del mismo sitio del cuerpo (p. Ej., Intestino), son más similares entre sí que a las muestras de los otros grupos (p. Ej., _Lengua_, _palma izquierda_, y _palma derecha_). Si llama a este comando con el parámetro `--p-pairwise`, como lo haremos aquí, también realizará pruebas por pares que le permitirán determinar qué pares de grupos específicos (por ejemplo, _lengua_ e _intestino_) difieren entre sí. Este comando puede ser lento de ejecutar, especialmente cuando le pasamos `--p-pairwise`, ya que se basa en pruebas de permutación. 
+
+Por lo tanto, a diferencia de los comandos anteriores, ejecutaremos la `beta-group-significance` en columnas específicas de metadatos que estamos interesados en explorar, en lugar de en todas las columnas de metadatos a las que es aplicable. Aquí aplicaremos esto a nuestras distancias UniFrac no ponderadas, utilizando dos columnas de metadata, de la siguiente manera:
+  
+  ```
+  qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --m-metadata-column body-site \
+  --o-visualization core-metrics-results/unweighted-unifrac-body-site-significance.qzv \
+  --p-pairwise
+```
+Luego:
+
+```
+qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --m-metadata-column subject \
+  --o-visualization core-metrics-results/unweighted-unifrac-subject-group-significance.qzv \
+  --p-pairwise
+ ```
+  
+Nuevamente, ninguno de los metadatos de muestra continua que tenemos para este conjunto de datos está correlacionado con la composición de la muestra, por lo que no probaremos esas asociaciones aquí. Si está interesado en realizar esas pruebas, puede usar la `distance-matrix` de metadata de qiime en combinación con los comandos qiime de diversidad mantel y qiime diversidad bioenv.
+
+Finalmente, la ordenación es un enfoque popular para explorar la composición de la comunidad microbiana en el contexto de metadatos de muestra. Podemos utilizar la herramienta Emperor para explorar gráficos de coordenadas principales (PCoA) en el contexto de metadata. El comando `core-metrics-phylogenetic` ya generó algunos gráficos de Emperor, pero ahora, le pasaremos el parámetro opcional, --p-custom-axes, que es muy útil para explorar datos de series de tiempo. Los resultados de PCoA que se utilizaron en `core-metrics-phylogeny` también están disponibles, lo que facilita la generación de nuevas visualizaciones con Emperor.
+
+Generaremos gráficos Emperor para UniFrac y Bray-Curtis no ponderados, de modo que el gráfico resultante contenga ejes para la coordenada principal 1, la coordenada principal 2 y los días desde el inicio del experimento. Usaremos ese último eje para explorar cómo estas muestras cambiaron con el tiempo.
+
+```[bash]
+qiime emperor plot \
+  --i-pcoa core-metrics-results/unweighted_unifrac_pcoa_results.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --p-custom-axes days-since-experiment-start \
+  --o-visualization core-metrics-results/unweighted-unifrac-emperor-days-since-experiment-start.qzv
+```
+
+```[bash]
+qiime emperor plot \
+  --i-pcoa core-metrics-results/bray_curtis_pcoa_results.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --p-custom-axes days-since-experiment-start \
+  --o-visualization core-metrics-results/bray-curtis-emperor-days-since-experiment-start.qzv
+  ```
+  
+  ## Gráficos de Rarefacción Alfa.
+  
+En esta sección, exploraremos la diversidad alfa como una función de la profundidad de muestreo utilizando el visualizador de rarefacción alfa de diversidad qiime. Este visualizador calcula una o más métricas de diversidad alfa en múltiples profundidades de muestreo, en pasos entre 1 (controlado opcionalmente con `--p-min-depth`) y el parámetro `--p-max-depth`. En cada paso de profundidad de muestreo, se generarán 10 tablas enrarecidas y se calcularán las métricas de diversidad para todas las muestras en las tablas. 
+
+El número de iteraciones (tablas enrarecidas calculadas en cada profundidad de muestreo) se puede controlar con `--p-iterations`. 
+
+Los valores de diversidad promedio se trazarán para cada muestra en cada profundidad de muestreo uniforme, y las muestras se pueden agrupar en función de los metadatos en la visualización resultante si los metadatos de muestra se proporcionan con el parámetro `--m-metadata-file`.
+
+```[bash]
+
+qiime diversity alpha-rarefaction \
+  --i-table table.qza \
+  --i-phylogeny rooted-tree.qza \
+  --p-max-depth 4000 \
+  --m-metadata-file sample-metadata.tsv \
+  --o-visualization alpha-rarefaction.qzv
+```  
+La visualización tendrá dos gráficos. El gráfico superior es un gráfico de __enrarecimiento alfa__ y se utiliza principalmente para determinar si la riqueza de las muestras se ha observado o secuenciado por completo. Si las líneas en el gráfico parecen "nivelarse" (es decir, se acercan a una pendiente de cero) a cierta profundidad de muestreo a lo largo del eje x, eso sugiere que la recolección de secuencias adicionales más allá de esa profundidad de muestreo probablemente no resulte en la observación de nuevos OTUs. Si las líneas en una curva no se nivelan, esto puede deberse a que la riqueza de las muestras aún no se ha observado por completo (porque se recopilaron muy pocas secuencias), o podría ser un indicador de que todavía existen muchos errores de secuenciación en los datos (que se confunde con diversidad novedosa).
+
+El gráfico inferior de esta visualización es importante al agrupar muestras por metadatos. Ilustra el número de muestras que quedan en cada grupo cuando la tabla de características se enrarece para cada profundidad de muestreo. Si una profundidad de muestreo dada d es mayor que la frecuencia total de una muestra s (es decir, el número de secuencias que se obtuvieron para las muestras s), no es posible calcular la métrica de diversidad para muestras sa la profundidad de muestreo d. Si muchas de las muestras en un grupo tienen frecuencias totales más bajas que d, la diversidad promedio presentada para ese grupo en d en la gráfica superior no será confiable porque se habrá calculado en relativamente pocas muestras. Por lo tanto, al agrupar muestras por metadatos, es esencial observar el gráfico inferior para asegurarse de que los datos presentados en el gráfico superior sean fiables.  
+  
+
+##### Nota
+
+El valor que proporcione para `--p-max-depth` debe determinarse revisando la información de "Frecuencia por muestra" presentada en el archivo `table.qzv` que se creó anteriormente. En general, la elección de un valor que esté en algún lugar alrededor de la frecuencia media parece funcionar bien, pero es posible que se  quiera aumentar ese valor si las líneas en la gráfica de rarefacción resultante no parecen nivelarse, o disminuir ese valor si parece perder muchas de sus muestras debido a las bajas frecuencias totales más cercanas a la profundidad de muestreo mínima que a la profundidad de muestreo máxima.
+
+### Análisis taxonómico
+
+En las siguientes secciones, comenzaremos a explorar la composición taxonómica de las muestras y, nuevamente, la relacionaremos con los metadatos de la muestra. El primer paso en este proceso es asignar taxonomía a las secuencias en nuestro artefacto FeatureData [Sequence] QIIME 2. Lo haremos con un clasificador Naive Bayes previamente entrenado y el complemento `q2-feature-classifier`. Este clasificador se entrenó en las OTU Greengenes 13_8 99%, donde las secuencias se han recortado para incluir solo 250 bases de la región del 16S que se secuenció en este análisis (la región V4, unida por el par de primers 515F / 806R). Aplicaremos este clasificador a nuestras secuencias y podremos generar una visualización del mapeo resultante de la secuencia a la taxonomía.
+
+#### Nota (Si usted desea realizar este tipo de investigación con otros datos)
+
+Los clasificadores taxonómicos funcionan mejor cuando se entrenan en función de la preparación de la muestra y los parámetros de secuenciación, aquí se debe incluir los primers que se utilizaron para la amplificación y también importa la longitud de los reads. Es importante que ustedes creen sus propios clasificadores utilizando GreenGenes y ARB Silva además de seguir las instrucciones de Entrenamiento de clasificadores de taxonomía con `q2-feature-classifier` para entrenar sus propios clasificadores taxonómicos. A continuación se compartiran unos clasificadores pre-calculados. 
+
+
+
+Descargar los clasificadores:
+
+```[bash]
+wget \
+  -O "gg-13-8-99-515-806-nb-classifier.qza" \
+  "https://data.qiime2.org/2021.8/common/gg-13-8-99-515-806-nb-classifier.qza"
+```
+
+
+Clasificar:
+
+```[bash]
+
+qiime feature-classifier classify-sklearn \
+  --i-classifier gg-13-8-99-515-806-nb-classifier.qza \
+  --i-reads rep-seqs.qza \
+  --o-classification taxonomy.qza
+```
+
+```
+
+qiime metadata tabulate \
+  --m-input-file taxonomy.qza \
+  --o-visualization taxonomy.qzv
+```
+
+A continuación, veremos la composición taxonómica de nuestras muestras con gráficos de barras interactivos. 
+
+Genere esos gráficos con el siguiente comando y luego abra la visualización. 
+```[bash]
+qiime taxa barplot \
+  --i-table table.qza \
+  --i-taxonomy taxonomy.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --o-visualization taxa-bar-plots.qzv
+```
+
+### Abundancia Diferencial con ANCOM (DA: Differential Abundance)
+
+ANCOM se puede aplicar para identificar features que son diferencialmente abundantes (es decir, presentes en diferentes abundancias) en los grupos de muestra. Al igual que con cualquier método bioinformático, debe conocer las suposiciones y limitaciones de ANCOM antes de usarlo. Si quiere profundizar su análisis, revise el paper de ANCOM antes de utilizar este método.
+
+
+ANCOM se implementa en el plugin de composición `q2-composition`. ANCOM asume que pocas (menos del 25% appr.) de las características están cambiando entre grupos. Si espera que cambien más funciones entre sus grupos, no debe usar ANCOM, ya que será más propenso a errores (es posible que aumenten los errores de Tipo I y Tipo II). Debido a que esperamos que muchas características cambien abundantemente en los distintos sitios del cuerpo, en este tutorial filtraremos nuestra tabla de características completa para que solo contenga muestras de intestino. Luego aplicaremos ANCOM para determinar qué variantes de secuencia y géneros, si los hay, son diferencialmente abundantes en las muestras intestinales de nuestros dos sujetos.
+
+Comenzaremos por crear una tabla de características que contenga solo las muestras de instinto. (Si quiere un tutorial de filtrado de datos puede ver [acá](https://docs.qiime2.org/2021.8/tutorials/filtering/))
 
 
