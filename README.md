@@ -393,11 +393,14 @@ El valor que proporcione para `--p-max-depth` debe determinarse revisando la inf
 
 ### Análisis taxonómico
 
-En las siguientes secciones, comenzaremos a explorar la composición taxonómica de las muestras y, nuevamente, la relacionaremos con los metadatos de la muestra. El primer paso en este proceso es asignar taxonomía a las secuencias en nuestro artefacto FeatureData [Sequence] QIIME 2. Lo haremos con un clasificador Naive Bayes previamente entrenado y el complemento `q2-feature-classifier`. Este clasificador se entrenó en las OTU Greengenes 13_8 99%, donde las secuencias se han recortado para incluir solo 250 bases de la región del 16S que se secuenció en este análisis (la región V4, unida por el par de primers 515F / 806R). Aplicaremos este clasificador a nuestras secuencias y podremos generar una visualización del mapeo resultante de la secuencia a la taxonomía.
+En las siguientes secciones, comenzaremos a explorar la composición taxonómica de las muestras y, nuevamente, la relacionaremos con los metadatos de la muestra. El primer paso en este proceso es asignar taxonomía a las secuencias en nuestro artefacto `FeatureData[Sequence]` de QIIME 2. Lo haremos con un clasificador [_Naive Bayes_](https://medium.com/datos-y-ciencia/algoritmos-naive-bayes-fudamentos-e-implementaci%C3%B3n-4bcb24b307f) previamente entrenado y el complemento `q2-feature-classifier`. Este clasificador se centrenó con el conjunto [Greengenes 13_8 99% OTU](http://greengenes.microbio.me/greengenes_release/gg_13_5/), donde las secuencias se han recortado para incluir solo 250 bases de la región del 16S que se secuenció en este análisis (la región V4, unida por el par de [primers 515F / 806R](https://earthmicrobiome.org/protocols-and-standards/16s/)).   
+Aplicaremos este clasificador a nuestras secuencias y podremos generar una visualización del mapeo resultante de la secuencia a la taxonomía.
 
 #### Nota (Si usted desea realizar este tipo de investigación con otros datos)
 
-Los clasificadores taxonómicos funcionan mejor cuando se entrenan en función de la preparación de la muestra y los parámetros de secuenciación, aquí se debe incluir los primers que se utilizaron para la amplificación y también importa la longitud de los reads. Es importante que ustedes creen sus propios clasificadores utilizando GreenGenes y ARB Silva además de seguir las instrucciones de Entrenamiento de clasificadores de taxonomía con `q2-feature-classifier` para entrenar sus propios clasificadores taxonómicos. A continuación se compartiran unos clasificadores pre-calculados. 
+Los clasificadores taxonómicos funcionan mejor cuando se entrenan en función de la preparación de la muestra y los parámetros de secuenciación, aquí se debe incluir los primers que se utilizaron para la amplificación y también importa la longitud de los reads. __Cuando esten trabajando con otros experimentos, es importante que ustedes creen sus propios clasificadores utilizando [GreenGenes](https://greengenes.secondgenome.com/) y [ARB Silva](https://www.arb-silva.de/) además de seguir las instrucciones de Entrenamiento de clasificadores de taxonomía con `q2-feature-classifier` para entrenar los clasificadores taxonómicos que sean adecuados para el conjunto de datos específico__.   
+
+A continuación se compartiran unos clasificadores pre-calculados para este trabajo/tutorial. 
 
 
 
