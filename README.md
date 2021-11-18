@@ -454,4 +454,43 @@ qiime feature-table filter-samples \
   --p-where "[body-site]='gut'" \
   --o-filtered-table gut-table.qza
   ```
+ANCOM trabaja con artefactos `FeatureTable[Composition]` de QIIME 2 , que se basa en frecuencias de features por muestra, pero no puede tolerar frecuencias de cero.   
+Para construir el artefacto de composición, se debe proporcionar un artefacto `FeatureTable[Frequency]`  al método `add-pseudocount` (un método de imputación), que producirá el artefacto `FeatureTable[Composition]`.
+```
+qiime composition add-pseudocount \
+  --i-table gut-table.qza \
+  --o-composition-table comp-gut-table.qza
+ ``` 
+ 
+ Luego, podemos ejecutar ANCOM en la columna `subject` para determinar qué características 
+ difieren en abundancia entre las muestras intestinales de los dos sujetos.
+ 
+```
+qiime composition ancom \
+  --i-table comp-gut-table.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --m-metadata-column subject \
+  --o-visualization ancom-subject.qzv
+```
 
+A menudo también nos interesa realizar una prueba de abundancia diferencial a un nivel taxonómico específico. Para hacer esto, podemos contraer las características en nuestra `FeatureTable[Frecuency]` en el nivel taxonómico de interés y luego volver a ejecutar los pasos anteriores. En este tutorial, colapsamos la tabla de características a nivel de género (es decir, nivel 6 de la taxonomía de Greengenes).
+
+```
+qiime taxa collapse \
+  --i-table gut-table.qza \
+  --i-taxonomy taxonomy.qza \
+  --p-level 6 \
+  --o-collapsed-table gut-table-l6.qza
+
+qiime composition add-pseudocount \
+  --i-table gut-table-l6.qza \
+  --o-composition-table comp-gut-table-l6.qza
+
+qiime composition ancom \
+  --i-table comp-gut-table-l6.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --m-metadata-column subject \
+  --o-visualization l6-ancom-subject.qzv
+  ```
+  
+  
