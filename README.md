@@ -77,6 +77,10 @@ Checkeamos la data con keemei:
 ![img](img/img8.png)
 
 
+Veremos que esta OK:  
+
+![img](img/img9.png)
+
 
 Ahora descargaremos la data, para esto haremos una carpeta:
 
