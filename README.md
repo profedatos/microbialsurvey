@@ -86,6 +86,13 @@ y revisamos el output de la extensión:
 ![img](img/img10.png)
 
 
+Como los datos vienen OK, procederemos a descargarlos:
+
+```[bash]
+wget \
+  -O "sample-metadata.tsv" \
+  "https://data.qiime2.org/2021.8/tutorials/moving-pictures/sample_metadata.tsv"
+```
 
 Ahora descargaremos la data, para esto haremos una carpeta:
 
