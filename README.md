@@ -1,6 +1,6 @@
 # Microbial Surveys
 
-En el presente tutorial, el alumno deberá ejecutar por si solo los comandos y deberá responder las preguntas del documento que se entregará el viernes 19 de nov. 2021. Utilizaremos `QIIME 2` para realizar un análisis de muestras de microbioma humano de dos individuos en cuatro sitios del cuerpo en cinco puntos de tiempo, el primero de los cuales siguió inmediatamente al uso de antibióticos. Un estudio basado en estas muestras se publicó originalmente en [Caporaso et al. (2011)](https://pubmed.ncbi.nlm.nih.gov/21624126/).  Este práctico esta basado en uno de los [tutoriales](https://docs.qiime2.org/2021.8/tutorials/) de QIIME2 disponible en la documentación online del programa.
+En el presente tutorial, el alumno deberá ejecutar por si solo los comandos y deberá responder las preguntas del documento que se entregará el viernes 19 de nov. 2021. Utilizaremos `QIIME 2` para realizar un análisis de muestras de microbioma humano de dos individuos en cuatro sitios del cuerpo en cinco puntos de tiempo, el primero de los cuales siguió inmediatamente al uso de antibióticos. Un estudio basado en estas muestras se publicó originalmente en [Caporaso et al. (2011)](https://pubmed.ncbi.nlm.nih.gov/21624126/).  Este práctico esta basado en uno de los [tutoriales](https://docs.qiime2.org/2021.8/tutorials/) de QIIME2 disponible en la documentación online del programa. Durante el práctico utilizaré varios términos que son de Qiime, por ejemplo: artefactos, es bueno revisar o tener a mano este [glosario](https://docs.qiime2.org/2021.8/glossary/) para entender que significa cada uno de ellos en QIIME2. 
 
 Los datos utilizados en este tutorial se secuenciaron en un [Illumina HiSeq](https://www.illumina.com/systems/sequencing-platforms/hiseq-2500.html) utilizando el protocolo de secuenciación de ARNr 16S de la región hipervariable 4 (V4) 16S de [Earth Microbiome Project](https://earthmicrobiome.org/).
 
@@ -170,7 +170,7 @@ Con ese comando, debería abrirse un navegador en el server, puede ver en la ima
 
 Los plugins de QIIME 2 están disponibles para varios métodos de control de calidad, algunos son DADA2, Deblur y el filtrado básico basado en quality score.  
 
-En este tutorial, el control de calidad se hará con DADA2. El resultado será del tipo artefacto QIIME 2 FeatureTable [Frequency], que contiene recuentos (frecuencias) de cada secuencia única en cada muestra en el dataset, y un artefacto FeatureData [Sequence] QIIME 2, que asigna identificadores de características en FeatureTable a las secuencias que representan.  
+En este tutorial, el control de calidad se hará con DADA2. El resultado será del tipo artefacto QIIME 2 `FeatureTable[Frequency]`, que contiene recuentos (frecuencias) de cada secuencia única en cada muestra en el dataset, y un artefacto `FeatureData[Sequence]` QIIME 2, que asigna identificadores de características en FeatureTable a las secuencias que representan.  
 
 
 
@@ -247,13 +247,13 @@ qiime phylogeny align-to-tree-mafft-fasttree \
 
 ## Análisis de diversidad alfa y beta
 
-Los análisis de diversidad de QIIME 2 están disponibles a través del plugin q2-diversity, que realiza el cálculo de métricas de [diversidad alfa y beta](https://www.metagenomics.wiki/pdf/definition/alpha-beta-diversity) ([acá también revisar](https://biomcare.com/info/key-terms-in-microbiome-projects/)), la aplicación de pruebas estadísticas relacionadas y la generación de visualizaciones interactivas. Primero aplicaremos el método `core-metrics-phylogenetic`, que enrarece (rarefies) una FeatureTable [Frequency] a una profundidad especificada por el usuario, calcula varias métricas de diversidad alfa y beta y genera gráficos de análisis de coordenadas de principales (PCoA) usando Emperor para cada uno de los métricas de diversidad beta. 
+Los análisis de diversidad de QIIME 2 están disponibles a través del plugin q2-diversity, que realiza el cálculo de métricas de [diversidad alfa y beta](https://www.metagenomics.wiki/pdf/definition/alpha-beta-diversity) ([acá también revisar](https://biomcare.com/info/key-terms-in-microbiome-projects/)), la aplicación de pruebas estadísticas relacionadas y la generación de visualizaciones interactivas. Primero aplicaremos el método `core-metrics-phylogenetic`, que enrarece (rarefies) una `FeatureTable[Frequency]` a una profundidad especificada por el usuario, calcula varias métricas de diversidad alfa y beta y genera gráficos de [análisis de coordenadas de principales (PCoA)](https://towardsdatascience.com/principal-coordinates-analysis-cc9a572ce6c) usando [Emperor](https://biocore.github.io/emperor/) ([Paper de EMPeror](https://gigascience.biomedcentral.com/articles/10.1186/2047-217X-2-16)) para cada uno de las métricas de diversidad beta. 
 
 Las métricas calculadas por defecto son:
 
 - Diversidad alfa
 
- - Índice de diversidad de Shannon (una medida cuantitativa de la riqueza de la comunidad)
+ - [Índice de diversidad de Shannon](https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/shannon.htm) (una medida cuantitativa de la riqueza de la comunidad) [[Ejemplo](https://entnemdept.ufl.edu/hodges/protectus/lp_webfolder/9_12_grade/student_handout_1a.pdf)]
 
  - Características observadas (una medida cualitativa de la riqueza de la comunidad)
 
@@ -443,7 +443,7 @@ qiime taxa barplot \
 
 ### Abundancia Diferencial con ANCOM (DA: Differential Abundance)
 
-[ANCOM](https://www.tandfonline.com/doi/full/10.3402/mehd.v26.27663) se puede aplicar para identificar features que son diferencialmente abundantes (es decir, presentes en diferentes abundancias) en los grupos de muestra. Al igual que con cualquier método bioinformático, debe conocer las suposiciones y limitaciones de ANCOM antes de usarlo. Si quiere profundizar su análisis, revise el paper de ANCOM antes de utilizar este método.
+[ANCOM](https://www.tandfonline.com/doi/full/10.3402/mehd.v26.27663) se puede aplicar para identificar features que son diferencialmente abundantes (es decir, presentes en diferentes abundancias) en los grupos de muestra. Al igual que con cualquier método bioinformático, debe conocer las suposiciones y limitaciones de ANCOM antes de usarlo. Si quiere profundizar su análisis, revise el paper de [ANCOM](https://www.tandfonline.com/doi/full/10.3402/mehd.v26.27663)  antes de utilizar este método.
 
 
 ANCOM se implementa en el plugin de composición `q2-composition`. ANCOM asume que pocas (menos del 25% appr.) de las características están cambiando entre grupos. Si espera que cambien más funciones entre sus grupos, no debe usar ANCOM, ya que será más propenso a errores (es posible que aumenten los errores de Tipo I y Tipo II). Debido a que esperamos que muchas características cambien abundantemente en los distintos sitios del cuerpo, en este tutorial filtraremos nuestra tabla de características completa para que solo contenga muestras de intestino. Luego aplicaremos ANCOM para determinar qué variantes de secuencia y géneros, si los hay, son diferencialmente abundantes en las muestras intestinales de nuestros dos sujetos.
