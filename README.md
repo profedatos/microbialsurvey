@@ -168,28 +168,27 @@ Con ese comando, debería abrirse un navegador en el server, puede ver en la ima
 
 ## Control de calidad de secuencia y construcción de tablas de características (features)
 
-Los plugins de QIIME 2 están disponibles para varios métodos de control de calidad, algunos son DADA2, Deblur y el filtrado básico basado en quality score. 
-En este tutorial, el control de calidad se hará con DADA2 y Deblur. Es solo necesario realizar un paso, ud puede elegir el que quiera.  El resultado de ambos métodos será un artefacto QIIME 2 FeatureTable [Frequency], que contiene recuentos (frecuencias) de cada secuencia única en cada muestra en el dataset, y un artefacto FeatureData [Sequence] QIIME 2, que asigna identificadores de características en FeatureTable a las secuencias que representan.
+Los plugins de QIIME 2 están disponibles para varios métodos de control de calidad, algunos son DADA2, Deblur y el filtrado básico basado en quality score.  
+
+En este tutorial, el control de calidad se hará con DADA2. El resultado será del tipo artefacto QIIME 2 FeatureTable [Frequency], que contiene recuentos (frecuencias) de cada secuencia única en cada muestra en el dataset, y un artefacto FeatureData [Sequence] QIIME 2, que asigna identificadores de características en FeatureTable a las secuencias que representan.  
 
 
 
 
 
-Nota
+## DADA2
 
-A medida que trabaje con una o ambas opciones en esta sección, creará artefactos con nombres de archivo que son específicos del método que está ejecutando (por ejemplo, la tabla de características que genera con dada2 denoise-single se llamará table -dada2.qza). Después de crear estos artefactos, cambiará el nombre de los artefactos de una de las dos opciones a nombres de archivo más genéricos (por ejemplo, table.qza). Este proceso de crear un nombre específico para un artefacto y luego cambiarle el nombre solo se realiza para permitirle elegir cuál de las dos opciones le gustaría usar para este paso, y luego completar el tutorial sin volver a prestar atención a esa elección. Es importante tener en cuenta que en este paso, o en cualquier paso de QIIME 2, los nombres de archivo que le está dando a los artefactos o visualizaciones no son importantes.
+DADA2 es un pipeline para detectar y corregir (cuando sea posible) los datos de secuencia de amplicones de Illumina. Esta implementado en el plugin q2-dada2, 
+este proceso de control de calidad filtrará adicionalmente cualquier lectura phiX (comúnmente presente en los datos de secuencia del gen marcador Illumina) que se identifique en los datos de secuenciación, y filtrará las secuencias quiméricas.
 
-## Opción 1: DADA2
+El método denoise-single de DADA2 requiere dos parámetros que se utilizan en el filtrado de calidad: `--p-trim-left m`, que recorta las primeras `m` bases de cada secuencia, y `--p-trunc-len n` que trunca cada secuencia en posición `n`. Esto permite al usuario eliminar regiones de baja calidad de las secuencias.  
+Para determinar qué valores pasar para estos dos parámetros, debe revisar la pestaña Gráfica de calidad interactiva en el archivo demux.qzv que fue generado por `qiime demux summarize` anteriormente.
 
-DADA2 es una canalización para detectar y corregir (cuando sea posible) los datos de secuencia de amplicones de Illumina. Como se implementó en el complemento q2-dada2, este proceso de control de calidad filtrará adicionalmente cualquier lectura phiX (comúnmente presente en los datos de secuencia del gen marcador Illumina) que se identifique en los datos de secuenciación, y filtrará las secuencias quiméricas.
+##### Pregunta
 
-El método dada2 denoise-single requiere dos parámetros que se utilizan en el filtrado de calidad: --p-trim-left m, que recorta las primeras m bases de cada secuencia, y --p-trunc-len n que trunca cada secuencia en posición n. Esto permite al usuario eliminar regiones de baja calidad de las secuencias. Para determinar qué valores pasar para estos dos parámetros, debe revisar la pestaña Gráfica de calidad interactiva en el archivo demux.qzv que fue generado por qiime demux resume arriba.
+Según los gráficos que ve en `demux.qzv`, ¿qué valores elegiría para `--p-trunc-len` y `--p-trim-left` en este caso?
 
-Pregunta
-
-Según los gráficos que ve en demux.qzv, ¿qué valores elegiría para --p-trunc-len y --p-trim-left en este caso?
-
-En los gráficos de calidad demux.qzv, vemos que la calidad de las bases iniciales parece ser alta, por lo que no recortaremos ninguna base desde el comienzo de las secuencias. La calidad parece disminuir alrededor de la posición 120, por lo que truncaremos nuestras secuencias en 120 bases. Este siguiente comando puede tardar hasta 10 minutos en ejecutarse y es el paso más lento de este tutorial.
+En los gráficos de calidad `demux.qzv`, vemos que la calidad de las bases iniciales parece ser alta, por lo que no recortaremos ninguna base desde el comienzo de las secuencias. La calidad parece disminuir alrededor de la posición 120, por lo que truncaremos nuestras secuencias en 120 bases. Este siguiente comando puede tardar hasta 10 minutos en ejecutarse y es el paso más lento de este tutorial.
 
 ```[bash]
 qiime dada2 denoise-single \
