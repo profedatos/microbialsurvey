@@ -35,6 +35,12 @@ Para esto instalaremos keemei en `google-chrome`.
 Keemei: es un complemento de Google Sheets para validar metadatos de muestras de microbial surveys. La validación de los metadatos de la muestra es importante antes de comenzar cualquier análisis. 
 Instalaremos Keemei siguiendo las instrucciones del [sitio web](https://keemei.qiime2.org/) y luego validaremos la metadata.
 
+Comenzaremos en la página de [keemei](https://keemei.qiime2.org/):
+
+
+[!img]()
+
+
 Ahora descargaremos la data, para esto haremos una carpeta:
 
 ```[bash]
