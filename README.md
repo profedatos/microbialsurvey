@@ -29,8 +29,8 @@ Primero crearemos un directorio en nuestros `/home` y entraremos al mismo:
  
  Descargar [aquí](https://data.qiime2.org/2021.8/tutorials/moving-pictures/sample_metadata.tsv)
  
-Esta metadata viene con algunas celdas inválidas, lo que es común en proyectos grandes de microbial survey.
-Para esto instalaremos keemei en `google-chrome`.
+Generalmente, la metadata viene con celdas inválidas, lo que es común en proyectos grandes de microbial surveys.
+Para validar el archivo, instalaremos keemei en `google-chrome`.
 
 Keemei: es un complemento de Google Sheets para validar metadatos de muestras de microbial surveys. La validación de los metadatos de la muestra es importante antes de comenzar cualquier análisis. 
 Instalaremos Keemei siguiendo las instrucciones del [sitio web](https://keemei.qiime2.org/) y luego validaremos la metadata.
