@@ -58,6 +58,11 @@ Quedará andando como add-on en `google-spreadsheets`:
 
 ![img](img/img3.png)
 
+Cargaremos nuestro tsv descargado en el spreadsheet de google drive:  
+
+
+![img](img/img4.png)
+
 
 
 Ahora descargaremos la data, para esto haremos una carpeta:
