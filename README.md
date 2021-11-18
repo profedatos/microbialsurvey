@@ -72,6 +72,10 @@ Cargaremos la data en importar:
 
 ![img](img/img7.png)
 
+Checkeamos la data con keemei:  
+
+![img](img/img8.png)
+
 
 
 Ahora descargaremos la data, para esto haremos una carpeta:
