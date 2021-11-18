@@ -232,9 +232,9 @@ qiime feature-table tabulate-seqs \
 
 QIIME admite varias métricas de diversidad filogenética, incluida la [diversidad filogenética de _Faith_](https://link.springer.com/content/pdf/10.1007%2F978-3-319-22461-9.pdf) y [UniFrac ponderado y no ponderado ](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3105689/). Además de los recuentos de características por muestra (es decir, los datos en el artefacto FeatureTable [Frecuencia] QIIME 2), estas métricas requieren un [árbol filogenético](https://www.nature.com/scitable/topicpage/reading-a-phylogenetic-tree-the-meaning-of-41956/) arraigado que relacione las características entre sí. Esta información se almacenará en un artefacto QIIME 2 Phylogeny [Rooted]. Para generar un árbol filogenético usaremos el pipeline align-to-tree-mafft-fasttree del plugin q2-phylogeny.
 
-Primero, el pipeline usa el programa [mafft](https://academic.oup.com/nar/article/41/W1/W22/1099639?login=true) para realizar una alineamiento múltiple de las secuencias en nuestro FeatureData [Sequence] para crear un artefacto FeatureData del tipo  QIIME 2 [AlignedSequence]. Luego, el pipeline enmascara (o filtra) el alineamiento para eliminar posiciones que son altamente variables.
+Primero, el pipeline usa el programa [mafft](https://pubmed.ncbi.nlm.nih.gov/23329690/) para realizar una alineamiento múltiple de las secuencias en nuestro FeatureData [Sequence] para crear un artefacto FeatureData del tipo  QIIME 2 [AlignedSequence]. Luego, el pipeline enmascara (o filtra) el alineamiento para eliminar posiciones que son altamente variables.
 
-Generalmente se considera que estas posiciones agregan ruido al árbol filogenético resultante. Después de eso, el pipeline aplica FastTree para generar un árbol filogenético a partir del alineamiento enmascarado. El programa FastTree crea un árbol sin raíz, por lo que en el paso final de esta sección se aplica la raíz del punto medio para colocar la raíz del árbol en el punto medio de la distancia de punta a punta más larga en el árbol sin raíz.
+Generalmente se considera que estas posiciones agregan ruido al árbol filogenético resultante. Después de eso, el pipeline aplica [FastTree](http://www.microbesonline.org/fasttree/) para generar un árbol filogenético a partir del alineamiento enmascarado. El programa FastTree crea un árbol sin raíz, por lo que en el paso final de esta sección se aplica la raíz del punto medio para colocar la raíz del árbol en el punto medio de la distancia de punta a punta más larga en el árbol sin raíz.
 
 ```[bash]
 qiime phylogeny align-to-tree-mafft-fasttree \
@@ -247,7 +247,7 @@ qiime phylogeny align-to-tree-mafft-fasttree \
 
 ## Análisis de diversidad alfa y beta
 
-Los análisis de diversidad de QIIME 2 están disponibles a través del plugin q2-diversity, que realiza el cálculo de métricas de diversidad alfa y beta, la aplicación de pruebas estadísticas relacionadas y la generación de visualizaciones interactivas. Primero aplicaremos el método `core-metrics-phylogenetic`, que enrarece (rarefies) una FeatureTable [Frequency] a una profundidad especificada por el usuario, calcula varias métricas de diversidad alfa y beta y genera gráficos de análisis de coordenadas de principales (PCoA) usando Emperor para cada uno de los métricas de diversidad beta. 
+Los análisis de diversidad de QIIME 2 están disponibles a través del plugin q2-diversity, que realiza el cálculo de métricas de [diversidad alfa y beta](https://www.metagenomics.wiki/pdf/definition/alpha-beta-diversity) ([acá también revisar](https://biomcare.com/info/key-terms-in-microbiome-projects/)), la aplicación de pruebas estadísticas relacionadas y la generación de visualizaciones interactivas. Primero aplicaremos el método `core-metrics-phylogenetic`, que enrarece (rarefies) una FeatureTable [Frequency] a una profundidad especificada por el usuario, calcula varias métricas de diversidad alfa y beta y genera gráficos de análisis de coordenadas de principales (PCoA) usando Emperor para cada uno de los métricas de diversidad beta. 
 
 Las métricas calculadas por defecto son:
 
@@ -440,7 +440,7 @@ qiime taxa barplot \
 
 ### Abundancia Diferencial con ANCOM (DA: Differential Abundance)
 
-ANCOM se puede aplicar para identificar features que son diferencialmente abundantes (es decir, presentes en diferentes abundancias) en los grupos de muestra. Al igual que con cualquier método bioinformático, debe conocer las suposiciones y limitaciones de ANCOM antes de usarlo. Si quiere profundizar su análisis, revise el paper de ANCOM antes de utilizar este método.
+[ANCOM](https://www.tandfonline.com/doi/full/10.3402/mehd.v26.27663) se puede aplicar para identificar features que son diferencialmente abundantes (es decir, presentes en diferentes abundancias) en los grupos de muestra. Al igual que con cualquier método bioinformático, debe conocer las suposiciones y limitaciones de ANCOM antes de usarlo. Si quiere profundizar su análisis, revise el paper de ANCOM antes de utilizar este método.
 
 
 ANCOM se implementa en el plugin de composición `q2-composition`. ANCOM asume que pocas (menos del 25% appr.) de las características están cambiando entre grupos. Si espera que cambien más funciones entre sus grupos, no debe usar ANCOM, ya que será más propenso a errores (es posible que aumenten los errores de Tipo I y Tipo II). Debido a que esperamos que muchas características cambien abundantemente en los distintos sitios del cuerpo, en este tutorial filtraremos nuestra tabla de características completa para que solo contenga muestras de intestino. Luego aplicaremos ANCOM para determinar qué variantes de secuencia y géneros, si los hay, son diferencialmente abundantes en las muestras intestinales de nuestros dos sujetos.
