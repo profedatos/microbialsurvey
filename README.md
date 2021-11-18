@@ -259,13 +259,10 @@ Las métricas calculadas por defecto son:
 
 -Diversidad beta
 
- - Distancia de Jaccard (una medida cualitativa de la disimilitud de la comunidad)
-
- - Distancia de Bray-Curtis (una medida cuantitativa de la disimilitud de la comunidad)
-
- - Distancia UniFrac no ponderada (una medida cualitativa de la disimilitud de la comunidad que incorpora relaciones filogenéticas entre las características)
-
- - Distancia UniFrac ponderada (una medida cuantitativa de la disimilitud de la comunidad que incorpora relaciones filogenéticas entre las características)
+   - Distancia de Jaccard (una medida cualitativa de la disimilitud de la comunidad)
+   - Distancia de Bray-Curtis (una medida cuantitativa de la disimilitud de la comunidad)
+   - Distancia UniFrac no ponderada (una medida cualitativa de la disimilitud de la comunidad que incorpora relaciones filogenéticas entre las características)
+   - Distancia UniFrac ponderada (una medida cuantitativa de la disimilitud de la comunidad que incorpora relaciones filogenéticas entre las características)
 
 
 Un parámetro importante que debe proporcionarse a este script es `--p-sampling-depth`, que es la profundidad de muestreo uniforme (es decir, rarefacción). 
