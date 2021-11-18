@@ -4,7 +4,7 @@ En el presente tutorial, el alumno deberá ejecutar por si solo los comandos y d
 
 Los datos utilizados en este tutorial se secuenciaron en un [Illumina HiSeq](https://www.illumina.com/systems/sequencing-platforms/hiseq-2500.html) utilizando el protocolo de secuenciación de ARNr 16S de la región hipervariable 4 (V4) 16S de [Earth Microbiome Project](https://earthmicrobiome.org/).
 
-Partiremos conectándonos mediante ssh al servidor
+Partiremos conectándonos mediante ssh al servidor, pero necesitamos hacer un tunel al x-server para visualizar los resultados.
 
 ```[bash]
 ssh -X btX@servidor
