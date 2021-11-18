@@ -86,7 +86,7 @@ y revisamos el output de la extensión:
 ![img](img/img10.png)
 
 
-Como los datos vienen OK, procederemos a descargarlos:
+Como los datos vienen OK, procederemos a descargarlos en el server:
 
 ```[bash]
 wget \
