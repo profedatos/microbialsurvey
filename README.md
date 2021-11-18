@@ -39,7 +39,6 @@ Ahora descargaremos la data, para esto haremos una carpeta:
 
 ```[bash]
 mkdir emp-single-end-sequences
-cd emp-single-end-sequences
 ```
 dentro de la carpeta descargaremos los barcodes utilizados:
 ```
