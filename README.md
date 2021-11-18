@@ -68,6 +68,10 @@ Abriremos un Spreadsheet en google drive:
 
 ![img](img/img6.png)
 
+Cargaremos la data en importar:  
+
+![img](img/img7.png)
+
 
 
 Ahora descargaremos la data, para esto haremos una carpeta:
