@@ -211,7 +211,7 @@ mv rep-seqs-dada2.qza rep-seqs.qza
 mv table-dada2.qza table.qza
 ``` 
 
-FeatureTable y FeatureData
+## FeatureTable y FeatureData
 
 Una vez finalizado el paso de filtrado de calidad, podemos explorar los datos resultantes mediante comandos que crearán resúmenes visuales de los datos. 
 El comando de resumen de la tabla de características le dará información sobre cuántas secuencias están asociadas con cada muestra y con cada característica, un par de histogramas de esas distribuciones y algunas estadísticas de resumen relacionadas. 
@@ -228,11 +228,11 @@ qiime feature-table tabulate-seqs \
   --o-visualization rep-seqs.qzv
 ```
 
-### Generar un árbol para análisis de diversidad filogenética¶
+### Generar un árbol para análisis de diversidad filogenética
 
-QIIME admite varias métricas de diversidad filogenética, incluida la diversidad filogenética de Faith y UniFrac ponderado y no ponderado. Además de los recuentos de características por muestra (es decir, los datos en el artefacto FeatureTable [Frecuencia] QIIME 2), estas métricas requieren un árbol filogenético arraigado que relacione las características entre sí. Esta información se almacenará en un artefacto QIIME 2 Phylogeny [Rooted]. Para generar un árbol filogenético usaremos el pipeline align-to-tree-mafft-fasttree del plugin q2-phylogeny.
+QIIME admite varias métricas de diversidad filogenética, incluida la [diversidad filogenética de _Faith_](https://link.springer.com/content/pdf/10.1007%2F978-3-319-22461-9.pdf) y [UniFrac ponderado y no ponderado ](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3105689/). Además de los recuentos de características por muestra (es decir, los datos en el artefacto FeatureTable [Frecuencia] QIIME 2), estas métricas requieren un [árbol filogenético](https://www.nature.com/scitable/topicpage/reading-a-phylogenetic-tree-the-meaning-of-41956/) arraigado que relacione las características entre sí. Esta información se almacenará en un artefacto QIIME 2 Phylogeny [Rooted]. Para generar un árbol filogenético usaremos el pipeline align-to-tree-mafft-fasttree del plugin q2-phylogeny.
 
-Primero, el pipeline usa el programa mafft para realizar una alineamiento múltiple de las secuencias en nuestro FeatureData [Sequence] para crear un artefacto FeatureData del tipo  QIIME 2 [AlignedSequence]. Luego, el pipeline enmascara (o filtra) el alineamiento para eliminar posiciones que son altamente variables.
+Primero, el pipeline usa el programa [mafft](https://academic.oup.com/nar/article/41/W1/W22/1099639?login=true) para realizar una alineamiento múltiple de las secuencias en nuestro FeatureData [Sequence] para crear un artefacto FeatureData del tipo  QIIME 2 [AlignedSequence]. Luego, el pipeline enmascara (o filtra) el alineamiento para eliminar posiciones que son altamente variables.
 
 Generalmente se considera que estas posiciones agregan ruido al árbol filogenético resultante. Después de eso, el pipeline aplica FastTree para generar un árbol filogenético a partir del alineamiento enmascarado. El programa FastTree crea un árbol sin raíz, por lo que en el paso final de esta sección se aplica la raíz del punto medio para colocar la raíz del árbol en el punto medio de la distancia de punta a punta más larga en el árbol sin raíz.
 
@@ -279,7 +279,7 @@ Debido a que la mayoría de las métricas de diversidad son sensibles a diferent
 Por ejemplo, si proporciona `--p-sampling-depth 500`, este paso submuestreará los recuentos en cada muestra sin reemplazo para que cada muestra en la tabla resultante tenga un recuento total de 500. Si el recuento total de cualquier muestra (s) es menor que este valor, esas muestras se eliminarán del análisis de diversidad. Elegir este valor es complicado. Se recomienda que haga su elección revisando la información presentada en el archivo table.qzv que se creó anteriormente. 
 Elija un valor lo más alto posible (para que conserve más secuencias por muestra) y, al mismo tiempo, excluya la menor cantidad de muestras posible.
 
-Pregunta
+##### Pregunta
 
 Vea el artefacto table.qzv QIIME 2 y, en particular, la pestaña Detalle de muestra interactiva en esa visualización. ¿Qué valor elegiría pasar por --p-sampling-depth? ¿Cuántas muestras se excluirán de su análisis en función de esta elección? ¿Cuántas secuencias totales analizará en el comando core-metrics-phylogenetic?
 
