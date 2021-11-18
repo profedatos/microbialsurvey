@@ -1,8 +1,10 @@
 # Microbial Surveys
 
-En este tutorial analizaremos una red utilizando secuencias de 16S de la tecnología Illumina utilizando qiime2.
+En el presente tutorial, el alumno deberá ejecutar por si solo los comandos y deberá responder las preguntas del documento que se entregará el viernes 19 de nov. 2021. Utilizaremos `QIIME 2` para realizar un análisis de muestras de microbioma humano de dos individuos en cuatro sitios del cuerpo en cinco puntos de tiempo, el primero de los cuales siguió inmediatamente al uso de antibióticos. Un estudio basado en estas muestras se publicó originalmente en [Caporaso et al. (2011)](https://pubmed.ncbi.nlm.nih.gov/21624126/).  Este práctico esta basado en uno de los [tutoriales](https://docs.qiime2.org/2021.8/tutorials/) de QIIME2 disponible en la documentación online del programa.
 
-Conectesé mediante ssh al servidor
+Los datos utilizados en este tutorial se secuenciaron en un [Illumina HiSeq](https://www.illumina.com/systems/sequencing-platforms/hiseq-2500.html) utilizando el protocolo de secuenciación de ARNr 16S de la región hipervariable 4 (V4) 16S de [Earth Microbiome Project](https://earthmicrobiome.org/).
+
+Partiremos conectándonos mediante ssh al servidor
 
 ```[bash]
 ssh btX@servidor
