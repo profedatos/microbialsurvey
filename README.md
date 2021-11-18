@@ -258,7 +258,6 @@ Las métricas calculadas por defecto son:
     - Equidad (o Equidad de Pielou; una medida de equidad comunitaria)
 
 -Diversidad beta
-
    - Distancia de Jaccard (una medida cualitativa de la disimilitud de la comunidad)
    - Distancia de Bray-Curtis (una medida cuantitativa de la disimilitud de la comunidad)
    - Distancia UniFrac no ponderada (una medida cualitativa de la disimilitud de la comunidad que incorpora relaciones filogenéticas entre las características)
