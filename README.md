@@ -159,6 +159,13 @@ lo que significa que se debe ejecutar la vista de herramientas qiime en el archi
 qiime tools view demux.qzv
 ```
 
+Con ese comando, debería abrirse un navegador en el server, puede ver en la imagen que dice (on devastator):
+
+![img](img/img11.png)
+
+
+
+
 ## Control de calidad de secuencia y construcción de tablas de características (features)
 
 Los plugins de QIIME 2 están disponibles para varios métodos de control de calidad, algunos son DADA2, Deblur y el filtrado básico basado en quality score. 
