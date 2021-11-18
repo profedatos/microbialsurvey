@@ -24,7 +24,7 @@ Primero crearemos un directorio en nuestros `/home` y entraremos al mismo:
  cd qiime2
  ```
   
- Descargaremos la metadata del tutorial en nuestro computador
+ Descargaremos la metadata del tutorial en nuestro computador (no en el server, en su PC/MAC).
  
  Descargar [aquí](https://data.qiime2.org/2021.8/tutorials/moving-pictures/sample_metadata.tsv)
  
