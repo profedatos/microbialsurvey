@@ -447,4 +447,11 @@ ANCOM se implementa en el plugin de composición `q2-composition`. ANCOM asume q
 
 Comenzaremos por crear una tabla de características que contenga solo las muestras de instinto. (Si quiere un tutorial de filtrado de datos puede ver [acá](https://docs.qiime2.org/2021.8/tutorials/filtering/))
 
+```[sh]
+qiime feature-table filter-samples \
+  --i-table table.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --p-where "[body-site]='gut'" \
+  --o-filtered-table gut-table.qza
+  ```
 
