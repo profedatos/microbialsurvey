@@ -5,7 +5,6 @@ En este tutorial analizaremos una red utilizando secuencias de 16S de la tecnolo
 Conectesé mediante ssh al servidor
 
 ```[bash]
-
 ssh btX@servidor
 ```
 He  creado un `environment` para este práctico utilizando `conda` para esto ejecute el siguiente comando en el servidor.
