@@ -110,6 +110,7 @@ Según los gráficos que ve en demux.qzv, ¿qué valores elegiría para --p-trun
 
 En los gráficos de calidad demux.qzv, vemos que la calidad de las bases iniciales parece ser alta, por lo que no recortaremos ninguna base desde el comienzo de las secuencias. La calidad parece disminuir alrededor de la posición 120, por lo que truncaremos nuestras secuencias en 120 bases. Este siguiente comando puede tardar hasta 10 minutos en ejecutarse y es el paso más lento de este tutorial.
 
+```[bash]
 qiime dada2 denoise-single \
   --i-demultiplexed-seqs demux.qza \
   --p-trim-left 0 \
@@ -117,11 +118,12 @@ qiime dada2 denoise-single \
   --o-representative-sequences rep-seqs-dada2.qza \
   --o-table table-dada2.qza \
   --o-denoising-stats stats-dada2.qza
-
-
+```
+```
 qiime metadata tabulate \
   --m-input-file stats-dada2.qza \
   --o-visualization stats-dada2.qzv
+``` 
 
 ```[bash]
 
