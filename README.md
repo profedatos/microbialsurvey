@@ -249,10 +249,10 @@ qiime phylogeny align-to-tree-mafft-fasttree \
 
 Los análisis de diversidad de QIIME 2 están disponibles a través del plugin q2-diversity, que realiza el cálculo de métricas de [diversidad alfa y beta](https://www.metagenomics.wiki/pdf/definition/alpha-beta-diversity) ([acá también revisar](https://biomcare.com/info/key-terms-in-microbiome-projects/)), la aplicación de pruebas estadísticas relacionadas y la generación de visualizaciones interactivas. Primero aplicaremos el método `core-metrics-phylogenetic`, que enrarece (rarefies) una `FeatureTable[Frequency]` a una profundidad especificada por el usuario, calcula varias métricas de diversidad alfa y beta y genera gráficos de [análisis de coordenadas de principales (PCoA)](https://towardsdatascience.com/principal-coordinates-analysis-cc9a572ce6c) usando [Emperor](https://biocore.github.io/emperor/) ([Paper de EMPeror](https://gigascience.biomedcentral.com/articles/10.1186/2047-217X-2-16)) para cada uno de las métricas de diversidad beta. 
 
-Las métricas calculadas por defecto son:
+Las métricas calculadas por defecto son (si quiere profundizar sobre estas métricas, [este](https://microbiome.github.io/OMA/microbiome-diversity.html) es un buen punto de partida):
 
 - Diversidad alfa
-    - [Índice de diversidad de Shannon](https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/shannon.htm) (una medida cuantitativa de la riqueza de la comunidad) [[Ejemplo](https://entnemdept.ufl.edu/hodges/protectus/lp_webfolder/9_12_grade/student_handout_1a.pdf)]
+    - Índice de diversidad de Shannon (una medida cuantitativa de la riqueza de la comunidad)
     - Características observadas (una medida cualitativa de la riqueza de la comunidad)
     - Faith's Phylogenetic Diversity (una medida cualitativa de la riqueza de la comunidad que incorpora relaciones filogenéticas entre las características)
     - Equidad (o Equidad de Pielou; una medida de equidad comunitaria)
