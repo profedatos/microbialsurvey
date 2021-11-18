@@ -38,7 +38,7 @@ Instalaremos Keemei siguiendo las instrucciones del [sitio web](https://keemei.q
 Comenzaremos en la página de [keemei](https://keemei.qiime2.org/):
 
 
-[!img]()
+[!img](img/img1.png)
 
 
 Ahora descargaremos la data, para esto haremos una carpeta:
