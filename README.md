@@ -37,12 +37,22 @@ Instalaremos Keemei siguiendo las instrucciones del [sitio web](https://keemei.q
 
 Comenzaremos en la página de [keemei](https://keemei.qiime2.org/):
 
-
+Hcemos click en el link de google-chrome:
 ![img](img/img1.png)
+
+Luego:"hacemos click en instalar.
+
 ![img](img/img2.png)
-![img](img/img3.png)
+
+Posteriormente se te solicitará dar permiso:
 ![img](img/img4.png)
+
+Deberas asociarlo con tu cuenta de gmail:
 ![img](img/img5.png)
+
+Quedará andando como add-on en `google-spreadsheets`
+
+![img](img/img3.png)
 
 
 
