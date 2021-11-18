@@ -7,7 +7,7 @@ Los datos utilizados en este tutorial se secuenciaron en un [Illumina HiSeq](htt
 Partiremos conectándonos mediante ssh al servidor
 
 ```[bash]
-ssh btX@servidor
+ssh -X btX@servidor
 ```
 He  creado un `environment` para este práctico utilizando `conda` para esto ejecute el siguiente comando en el servidor.
 
