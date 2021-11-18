@@ -1,6 +1,21 @@
 # Microbial Surveys
 
-En este tutorial analizaremos una red utilizando secuencias de 16S de la tecnología Illumina.
+En este tutorial analizaremos una red utilizando secuencias de 16S de la tecnología Illumina utilizando qiime2.
+
+Conectesé mediante ssh al servidor
+
+```[bash]
+
+ssh btX@servidor
+```
+He  creado un `environment` para este práctico utilizando `conda` para esto ejecute el siguiente comando en el servidor.
+
+```[bash]
+conda activate qiime2
+```
+
+Antes de su usario en el prompt se debería cambiar de `(base)` a `(qiime2)`.
+
 
 Primero crearemos un directorio en nuestros `/home` y entraremos al mismo:
 
