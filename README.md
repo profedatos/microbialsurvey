@@ -252,14 +252,10 @@ Los análisis de diversidad de QIIME 2 están disponibles a través del plugin q
 Las métricas calculadas por defecto son:
 
 - Diversidad alfa
-
- - [Índice de diversidad de Shannon](https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/shannon.htm) (una medida cuantitativa de la riqueza de la comunidad) [[Ejemplo](https://entnemdept.ufl.edu/hodges/protectus/lp_webfolder/9_12_grade/student_handout_1a.pdf)]
-
- - Características observadas (una medida cualitativa de la riqueza de la comunidad)
-
- - Faith's Phylogenetic Diversity (una medida cualitativa de la riqueza de la comunidad que incorpora relaciones filogenéticas entre las características)
-
- - Equidad (o Equidad de Pielou; una medida de equidad comunitaria)
+    - [Índice de diversidad de Shannon](https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/shannon.htm) (una medida cuantitativa de la riqueza de la comunidad) [[Ejemplo](https://entnemdept.ufl.edu/hodges/protectus/lp_webfolder/9_12_grade/student_handout_1a.pdf)]
+    - Características observadas (una medida cualitativa de la riqueza de la comunidad)
+    - Faith's Phylogenetic Diversity (una medida cualitativa de la riqueza de la comunidad que incorpora relaciones filogenéticas entre las características)
+    - Equidad (o Equidad de Pielou; una medida de equidad comunitaria)
 
 -Diversidad beta
 
