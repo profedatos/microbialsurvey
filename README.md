@@ -72,14 +72,19 @@ Cargaremos la data en importar:
 
 ![img](img/img7.png)
 
-Checkeamos la data con keemei:  
+Checkeamos la data con keemei, para esto iremos a Extensiones:  
 
 ![img](img/img8.png)
 
 
-Veremos que esta OK:  
+Seleccionamos QIIME 2:  
 
 ![img](img/img9.png)
+
+y revisamos el output de la extensión:
+
+![img](img/img10.png)
+
 
 
 Ahora descargaremos la data, para esto haremos una carpeta:
