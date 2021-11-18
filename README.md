@@ -181,7 +181,7 @@ En este tutorial, el control de calidad se hará con DADA2. El resultado será d
 DADA2 es un pipeline para detectar y corregir (cuando sea posible) los datos de secuencia de amplicones de Illumina. Esta implementado en el plugin q2-dada2, 
 este proceso de control de calidad filtrará adicionalmente cualquier lectura phiX (comúnmente presente en los datos de secuencia del gen marcador Illumina) que se identifique en los datos de secuenciación, y filtrará las secuencias quiméricas.
 
-El método denoise-single de DADA2 requiere dos parámetros que se utilizan en el filtrado de calidad: `--p-trim-left m`, que recorta las primeras `m` bases de cada secuencia, y `--p-trunc-len n` que trunca cada secuencia en posición `n`. Esto permite al usuario eliminar regiones de baja calidad de las secuencias.  
+El método `qiime dada2 denoise-single` requiere dos parámetros que se utilizan en el filtrado de calidad: `--p-trim-left m`, que recorta las primeras `m` bases de cada secuencia, y `--p-trunc-len n` que trunca cada secuencia en posición `n`. Esto permite al usuario eliminar regiones de baja calidad de las secuencias.  
 Para determinar qué valores pasar para estos dos parámetros, debe revisar la pestaña Gráfica de calidad interactiva en el archivo demux.qzv que fue generado por `qiime demux summarize` anteriormente.
 
 ##### Pregunta
