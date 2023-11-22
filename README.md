@@ -125,7 +125,7 @@ qiime tools import \
 
 ```
 
-Para aprender cómo importar datos de secuencia en otros formatos, puede ver un práctico tutorial [aquí](https://docs.qiime2.org/2021.8/tutorials/importing/).
+Para aprender cómo importar datos de secuencia en otros formatos, puede ver un práctico tutorial [aquí](https://docs.qiime2.org/2023.9/tutorials/importing/).
 
 
 ## Demultiplex
@@ -163,18 +163,11 @@ Con ese comando, debería abrirse un navegador en el server, puede ver en la ima
 
 ![img](img/img11.png)
 
-
-
-
 ## Control de calidad de secuencia y construcción de tablas de características (features)
 
 Los plugins de QIIME 2 están disponibles para varios métodos de control de calidad, algunos son DADA2, Deblur y el filtrado básico basado en quality score.  
 
 En este tutorial, el control de calidad se hará con DADA2. El resultado será del tipo artefacto QIIME 2 `FeatureTable[Frequency]`, que contiene recuentos (frecuencias) de cada secuencia única en cada muestra en el dataset, y un artefacto `FeatureData[Sequence]` QIIME 2, que asigna identificadores de características en FeatureTable a las secuencias que representan.  
-
-
-
-
 
 ## DADA2
 
@@ -401,7 +394,7 @@ Descargar los clasificadores:
 ```[bash]
 wget \
   -O "gg-13-8-99-515-806-nb-classifier.qza" \
-  "https://data.qiime2.org/2021.8/common/gg-13-8-99-515-806-nb-classifier.qza"
+  "https://data.qiime2.org/2023.9/common/gg-13-8-99-515-806-nb-classifier.qza"
 ```
 
 
