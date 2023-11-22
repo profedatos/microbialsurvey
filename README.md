@@ -91,7 +91,7 @@ Como los datos vienen OK, procederemos a descargarlos en el server:
 ```[bash]
 wget \
   -O "sample-metadata.tsv" \
-  "https://data.qiime2.org/2021.8/tutorials/moving-pictures/sample_metadata.tsv"
+  "https://data.qiime2.org/2023.9/tutorials/moving-pictures/sample_metadata.tsv"
 ```
 
 Ahora descargaremos la data, para esto haremos una carpeta:
@@ -103,13 +103,13 @@ dentro de la carpeta descargaremos los barcodes utilizados:
 ```
 wget \
   -O "emp-single-end-sequences/barcodes.fastq.gz" \
-  "https://data.qiime2.org/2021.8/tutorials/moving-pictures/emp-single-end-sequences/barcodes.fastq.gz"
+  "https://data.qiime2.org/2023.9/tutorials/moving-pictures/emp-single-end-sequences/barcodes.fastq.gz"
 ``` 
 Ahora descargaremos los reads:
 ```
 wget \
   -O "emp-single-end-sequences/sequences.fastq.gz" \
-  "https://data.qiime2.org/2021.8/tutorials/moving-pictures/emp-single-end-sequences/sequences.fastq.gz"
+  "https://data.qiime2.org/2023.9/tutorials/moving-pictures/emp-single-end-sequences/sequences.fastq.gz"
 ```
 Todos los datos que se utilizan como entrada a QIIME 2 están en forma de artefactos QIIME 2 (qiime2 artifacts), 
 estos contienen información sobre el tipo de datos y la fuente de los datos. Entonces, lo primero que debemos hacer es importar estos archivos de datos de secuencia en un artefacto QIIME 2.
