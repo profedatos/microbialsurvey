@@ -7,7 +7,7 @@ Los datos utilizados en este tutorial se secuenciaron en un [Illumina HiSeq](htt
 Partiremos conectándonos mediante ssh al servidor, pero necesitamos hacer un tunel al x-server para visualizar los resultados.
 
 ```[bash]
-ssh  grupoN@servidor
+ssh -X grupoN@servidor
 ```
 He  creado un `environment` para este práctico utilizando `conda` para esto ejecute el siguiente comando en el servidor.
 
