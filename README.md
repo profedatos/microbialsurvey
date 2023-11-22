@@ -7,15 +7,15 @@ Los datos utilizados en este tutorial se secuenciaron en un [Illumina HiSeq](htt
 Partiremos conectándonos mediante ssh al servidor, pero necesitamos hacer un tunel al x-server para visualizar los resultados.
 
 ```[bash]
-ssh -X btX@servidor
+ssh  grupoN@servidor
 ```
 He  creado un `environment` para este práctico utilizando `conda` para esto ejecute el siguiente comando en el servidor.
 
 ```[bash]
-conda activate qiime2
+conda activate qiime2-amplicon-2023.9
 ```
 
-Antes de su usario en el prompt se debería cambiar de `(base)` a `(qiime2)`.
+Antes de su usario en el prompt se debería cambiar de `(base)` a `(qiime2-amplicon-2023.9)`.
 
 
 Primero crearemos un directorio en nuestros `/home` y entraremos al mismo:
@@ -27,7 +27,7 @@ Primero crearemos un directorio en nuestros `/home` y entraremos al mismo:
   
  Descargaremos la metadata del tutorial en nuestro computador (no en el server, en su PC/MAC).
  
- Descargar [aquí](https://data.qiime2.org/2021.8/tutorials/moving-pictures/sample_metadata.tsv)
+ Descargar [aquí](https://data.qiime2.org/2023.9/tutorials/moving-pictures/sample_metadata.tsv)
  
 Generalmente, la metadata viene con celdas inválidas, lo que es común en proyectos grandes de microbial surveys.
 Para validar el archivo, instalaremos keemei en `google-chrome`.
