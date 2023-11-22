@@ -160,9 +160,31 @@ lo que significa que se debe ejecutar la vista de herramientas qiime en el archi
 qiime tools view demux.qzv
 ```
 
-Con ese comando, debería abrirse un navegador en el server, puede ver en la imagen que dice (on devastator):
+Con ese comando, debería abrirse un navegador en el server, puede ver en la imagen que dice (on devastator), si no pudiera cargar firefox o le arroja un error ver más abajo:
 
 ![img](img/img11.png)
+  
+Si no funciona la visualización, generamos una carpeta con el contenido para ver en nuestro computador personal.
+Con el siguiente comando, transformamos un artefacto qiime de visualización (.qzv) en una carpeta con los datos e imágenes. 
+```[bash]
+qiime tools export --input-path demux.qzv --output-path se-demux
+```
+Comprimimos la carpeta con `tar`
+```[bash]
+tar cvfz se-demux.tar.gz se-demux
+```
+hacemos un `scp` desde el `cmd` 
+
+```[bash]
+scp grupoN@servidor:qiime2/se-demux.tar.gz .
+```
+
+Descomprimimos y vemos los archivos.
+
+
+
+
+
 
 ## Control de calidad de secuencia y construcción de tablas de características (features)
 
