@@ -173,7 +173,7 @@ Comprimimos la carpeta con `tar`
 ```[bash]
 tar cvfz se-demux.tar.gz se-demux
 ```
-hacemos un `scp` desde el `cmd` 
+Desde su computador ejecute `scp` desde el `cmd` en windows o del `terminal` en MAC/Linux
 
 ```[bash]
 scp grupoN@servidor:qiime2/se-demux.tar.gz .
