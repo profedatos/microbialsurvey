@@ -295,17 +295,13 @@ Vea el artefacto table.qzv QIIME 2 y, en particular, la pestaña Detalle de mues
 qiime diversity core-metrics-phylogenetic \
   --i-phylogeny rooted-tree.qza \
   --i-table table.qza \
-  --p-sampling-depth 1103 \
+  --p-sampling-depth 1402 \
   --m-metadata-file sample-metadata.tsv \
   --output-dir core-metrics-results
 ```
 
-Aquí establecemos el parámetro `--p-sampling-depth` en `1103`. Este valor se eligió en función del número de secuencias en la muestra `L3S313` porque está cerca del número de secuencias en las siguientes muestras que tienen conteos de secuencia más altos, y porque es considerablemente más alto (relativamente) que el número de secuencias en las muestras que tienen menos secuencias.   
-Esto nos permitirá conservar la mayoría de nuestras muestras. Las tres muestras que tienen menos secuencias se eliminarán de los análisis de `core-metrics-phylogenetics` y de cualquier cosa que utilice estos resultados.  
-
-Vale la pena señalar que estas tres muestras son muestras de la _palma derecha_. 
-Perder gran cantidad de muestras de una categoría de metadatos no es lo ideal. Sin embargo, estamos dejando caer una cantidad suficientemente pequeña de muestras aquí, teniendo un buen trade-off entre las secuencias totales analizadas y la cantidad de muestras retenidas.
-
+Aquí establecemos el parámetro `--p-sampling-depth` en `1402`. Este valor se eligió en función del número de secuencias en la muestra `L3S242` porque está cerca del número de secuencias en las siguientes muestras que tienen conteos de secuencia más altos, y porque es considerablemente más alto (relativamente) que el número de secuencias en las muestras que tienen menos secuencias.   
+Si existen muestras con menor cantidad de reads que el `sampling-depth` se eliminarán de los análisis de `core-metrics-phylogenetics` y de cualquier análisis posterior que utilice estos resultados.  
 
 Después de calcular las métricas de diversidad, podemos comenzar a explorar la composición microbiana de las muestras en el contexto de la metadata. Esta información está presente en el archivo de metadatos de muestra que descargamos anteriormente.
 
